@@ -1,0 +1,22 @@
+$def with (error)
+<link href="https://sjurl.tk/static/css/bootstrap-4.4.1.css" rel="stylesheet" type="text/css"> 
+<title>SJAUTH -- Errors</title>
+
+$if error == 1:
+	<div class="alert alert-danger" role="alert">
+	Account already exists.
+	</div>
+$elif error == 2:
+	<div class="alert alert-danger" role="alert">
+	Incorrect account details.
+	</div>
+
+$elif error == 3:
+	<div class="alert alert-danger" role="alert">
+	Account does not exist.
+	</div>
+
+$elif error == 4:
+	<div class="alert alert-danger" role="alert">
+	You are not an admin.
+	</div>

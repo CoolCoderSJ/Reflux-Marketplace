@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>API</title>
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+		<link rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/atom-one-dark.min.css">
+				<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+				<script>hljs.initHighlightingOnLoad();</script>
+		<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="/">Reflux Marketplace</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav">
+      <a class="nav-item nav-link active" href="/">Home <span class="sr-only">(current)</span></a>
+      <a class="nav-item nav-link" href="/add">Share a theme</a>
+
+	  <a class="nav-item nav-link" href="/api">View the API Docs</a>
+	  <a class="nav-item nav-link" href="/generator">Theme Generator</a>
+    </div>
+  </div>
+</nav>
+	</head>
+	<style>
+		@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300&display=swap');
+		h1, h2, h3, h4, h5, h6, p, em, strong, li, a {
+			font-family: "Nunito Sans", sans-serif;
+		}
+		a {
+			color: #7289da;
+		}
+		hr {
+			border: none;
+			height: 1px;
+			/* Set the hr color */
+			color: #000; /* old IE */
+			background-color: #000; /* Modern Browsers */
+		}
+	</style>
+	<body>
+		<pre><code>REFLUX MARKETPLACE API DOCS v0.2
+			<br>
+ENDPOINT: 'https://reflux-marketplace.coolcodersj.repl.co/apiv2'
+<br>
+RESPONSE: 'The endpoint will return a JSON response for compatibility. Get the JSON, and set a variable to equal the value of &quot;themes&quot; from the JSON. This value will either be an array or a list. The list has one dictionary, each for a separate theme.'
+
+VALUES: "These are values in the dictionary inside the list. "
+
+id: THEME ID
+user: THE USERNAME OF THE SUBMITTEE
+name: THEME NAME
+desc: THEME DESC
+code-jswa: JS CODE TO ACTIVATE (For bookmarklets, alerts user every time code is run.)
+code-jswoa: Tampermonkey Script (does not alert user every time code is run.)
+</code></pre>
+	<br><br><br>
+
+	<pre><code>REFLUX MARKETPLACE API DOCS v0.1
+<br>ENDPOINT: 'https://reflux-marketplace.coolcodersj.repl.co/apiv1'
+<br>>RESPONSE: 'The endpoint will return a JSON response for compatibility. Get the JSON, and set a variable to equal the value of &quot;themes&quot; from the JSON. This value will either be an array or a list. The list has one dictionary, each for a separate theme.'
+
+VALUES: "These are values in the dictionary inside the list. "
+
+id: THEME ID
+user: THE USERNAME OF THE SUBMITTEE
+name: THEME NAME
+desc: THEME DESC
+code-jswa: JS CODE TO ACTIVATE
+</code></pre>
+</body>
+</html>

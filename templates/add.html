@@ -1,0 +1,54 @@
+
+<!DOCTYPE html>
+<html>
+
+
+	<head>
+		<link href="https://sjurl.tk/static/css/bootstrap-4.4.1.css" rel="stylesheet" type="text/css"> 
+		<title>Reflux Marketplace</title>
+		<style>
+			form {
+				padding: 20px;
+			}
+		</style>
+		<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="/">Reflux Marketplace</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav">
+      <a class="nav-item nav-link active" href="/">Home <span class="sr-only">(current)</span></a>
+      <a class="nav-item nav-link" href="/add">Share a theme</a>
+	  <a class="nav-item nav-link" href="https://github.com/frissyn/Reflux">Reflux Github Repo</a>
+	   <a class="nav-item nav-link" href="/api">View the API Docs</a>
+	   <a class="nav-item nav-link" href="/generator">Theme Generator</a>
+    </div>
+  </div>
+</nav>
+	</head>
+
+	<body>
+
+		<form method="post" action = "add" enctype="multipart/form-data">
+
+  <div class="form-group">
+    <input type="username" class="form-control" id="short" name="person"  aria-describedby="emailHelp" placeholder="Your Repl.it Username (The exact one please, we will ping you when it is added.)" required>
+	<br>
+	<input type="username" class="form-control" id="short" name="name"  aria-describedby="emailHelp" placeholder="Your Theme's Name" required>
+	<br>
+	<input type="username" class="form-control" id="short" name="desc"  aria-describedby="emailHelp" placeholder="Your Theme's Description" required>
+	<br>
+	<input type="username" class="form-control" id="short" name="code"  aria-describedby="emailHelp" placeholder="Your Theme's Repl Link (Our server hates plain js code)" required>
+	<br>
+
+	<label for="formFile" class="form-label">Upload a Screenshot showing repl.it with your theme</label>
+	<input type="file" class="form-control inputadd" name="myfile" id="formFile" placeholder="Upload a Screenshot showing repl.it with your theme">
+    
+  </div>
+	<br>
+	<br>
+  <button type="submit" class="btn btn-primary">Add</button>
+</form>
+	</body>
+</html>
