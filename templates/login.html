@@ -1,48 +1,35 @@
 
 <!DOCTYPE html>
 <html>
-			<link rel="icon" 
-      type="image/ico" 
-      href="https://sjurl.tk/static/images/favicon.ico">
+			<link rel="icon"
+	  type="image/ico"
+	  href="https://sjurl.tk/static/images/favicon.ico">
 
 	<head>
-		<link href="https://sjurl.repl.co/static/css/bootstrap-4.4.1.css" rel="stylesheet" type="text/css"> 
+		<link href="https://Minimalist.coolcodersj.repl.co/nord" rel="stylesheet" type="text/css" />
+
 		<title>SJAUTH -- Login</title>
 		<style>
 			form {
 				padding: 20px;
 			}
 		</style>
-		<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="/">Reflux Marketplace</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-    <div class="navbar-nav">
-      <a class="nav-item nav-link active" href="/">Home <span class="sr-only">(current)</span></a>
-      <a class="nav-item nav-link" href="/add">Share a theme</a>
-	  <a class="nav-item nav-link" href="https://github.com/frissyn/Reflux">Reflux Github Repo</a>
-	   <a class="nav-item nav-link" href="/api">View the API Docs</a>
-	   <a class="nav-item nav-link" href="/generator">Theme Generator</a>
-    </div>
-  </div>
-</nav>
+		<nav class="topnav">
+		<a class="brand" href="/">Reflux Marketplace</a>
+		<div class="topnavitem">
+		<a href="/">Home</a>
+		<a href="/add">Share a theme</a>
+		<a href="https://github.com/frissyn/Reflux">Reflux Github Repo</a>
+		<a href="/api">View the API Docs</a>
+		<a href="/generator">Theme Generator</a>
+		<a href="https://github.com/CoolCoderSJ/Reflux-Marketplace">View on Github</a>
+		<a href="https://discord.com/api/oauth2/authorize?client_id=826087358096474132&permissions=0&scope=bot">Discord Bot</a>
+		</div>
+		</nav>
 	</head>
 
 	<body>
-
-		<form method="post" action = "login">
-
-  <div class="form-group">
-    <input type="username" class="form-control" id="short" name="user"  aria-describedby="emailHelp" placeholder="Username" required>
-
-    <input type="password" class="form-control" id="url" name="passw" required placeholder="Password" required>
-  </div>
-
-	<br>
-  <button type="submit" class="btn btn-primary">Login</button>
-</form>
-<iframe height="400px" width="100%" src="https://sjauth.coolcodersj.repl.co/badge" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals"></iframe>
+		<a href="/login/replit"><button>Login With Replit</button></a>
+		<a href="/login/admin"><button>Admin Login</button></a>
 	</body>
 </html>

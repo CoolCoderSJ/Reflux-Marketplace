@@ -1,43 +1,38 @@
-$def with (code, themes, user, db, actualcode, js_wa)
+$def with (code, db, user)
 <meta name="viewport" content="width=device-width, inital-scale=1">
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 <link rel="stylesheet" href="static/css/static.css">
-<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 <link rel="stylesheet"
-      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/atom-one-dark.min.css">
+	  href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/atom-one-dark.min.css">
 				<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
 				<script>hljs.initHighlightingOnLoad();</script>
 <script src="static/js/script.js"></script>
+<link href="https://Minimalist.coolcodersj.repl.co/nord" rel="stylesheet" type="text/css" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://Minimalist.coolcodersj.repl.co/mjs"></script>
+
 <title>Reflux Marketplace</title>
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="/">Reflux Marketplace</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-    <div class="navbar-nav">
-      <a class="nav-item nav-link active" href="/">Home <span class="sr-only">(current)</span></a>
-      <a class="nav-item nav-link" href="/add">Share a theme</a>
-	  $if user != "False":
-	  	<a class="nav-item nav-link" href="/admin">$user</a>
-	  $else:
-	  	<a class="nav-item nav-link" href="/login">Login</a>
-	  <a class="nav-item nav-link" href="https://github.com/frissyn/Reflux">Reflux Github Repo</a>
-		  
-	  <a class="nav-item nav-link" href="/api">View the API Docs</a>
-	  <a class="nav-item nav-link" href="/generator">Theme Generator</a>
-    </div>
-  </div>
+<nav class="topnav">
+<a class="brand" href="/">Reflux Marketplace</a>
+<div class="topnavitem">
+<a href="/">Home</a>
+<a href="/add">Share a theme</a>
+$if user == "":
+	<a href="/login">Login</a>
+$else:
+	<a href="/admin">Admin Panel</a>
+<a href="https://github.com/frissyn/Reflux">Reflux Github Repo</a>
+<a href="/api">View the API Docs</a>
+<a href="/generator">Theme Generator</a>
+<a href="https://github.com/CoolCoderSJ/Reflux-Marketplace">View on Github</a>
+<a href="https://discord.com/api/oauth2/authorize?client_id=826087358096474132&permissions=0&scope=bot">Discord Bot</a>
+</div>
 </nav>
 
 <style>
 	.card-group {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
   grid-gap: 1fr;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
 }
 .card {
   width: 100%;
@@ -52,97 +47,111 @@ $def with (code, themes, user, db, actualcode, js_wa)
 }
 }
 </style>
-<div class="alert alert-success" role="alert">
-  	Sponsored by the creator of Reflux!
+<div class="success" role="alert">
+	  Sponsored by the creator of Reflux!
 </div>
 $if code == "1":
-	<div class="alert alert-success" role="alert">
-  		Your theme has been submitted and is awaiting review!
+	<div class="success" role="alert">
+		  Your theme has been submitted and is awaiting review!
 	</div>
 $elif code == "2":
-	<div class="alert alert-success" role="alert">
-  		Your theme has been submitted and is awaiting review! (Due to a bug, just come back to the marketplace once it is approved to find your code.)
-		
+	<div class="success" role="alert">
+		  Your theme has been submitted and is awaiting review! (Due to a bug, just come back to the marketplace once it is approved to find your code.)
 	</div>
-	
 
+
+
+
+<br><br>
 <div class="card-group">
 
-	$for theme in themes:
-		$if theme[-1] != 'False':
-			<div class="card">
-				<img src="$db[theme[0]]" class="card-img-top" alt="preview">
+	$for theme in db:
+		$if theme['verified'] == True:
+			<div style="padding: 30px;">
+			<div class="card" style="padding-bottom: 0px;">
+				<form method="post" action="admin/edit">
+				<img src="$theme['imgurl']" class="card-img-top" alt="preview" style="width: 450px;">
 				<div class="card-body">
-				<h5 class="card-title">$theme[2], by $theme[1]</h5>
-				<p class="card-text">$theme[3]</p>
+				<h5 class="card-title"><input class="input" value="$theme['name']" name="name"
+					$if not "CoolCoderSJ" in user:
+						disabled
+					>
+					<input class="input" value="$theme['creator']" name="creator"
+						$if not "CoolCoderSJ" in user:
+							disabled
+						></h5>
+				<input class="input" value="$theme['description']" name="desc"
+					$if not "CoolCoderSJ" in user:
+						disabled
+					>
 				<p class="card-text"><small class="text-muted"></small></p>
 				</div>
-				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#t$theme[0]">
+				$if "CoolCoderSJ" in user:
+					<input type="hidden" name="id" value="$theme['id']"/>
+					<input type="file" class="form-control inputadd" name="myfile" id="formFile" placeholder="Upload a Screenshot showing repl.it with your theme">
+
+							<br>
+					<button type="submit" class="btn btn-primary" style="width: 100%">
+					Edit
+					</button>
+				</form>
+
+				<button type="button" class="btn btn-primary" modalid="t$theme['id']" onclick="modalshow(this)">
 			See Code
 			</button>
-			$if user != "False":
-				<form method="POST" action="delete">
-					<input type="hidden" name="id" value="$theme[0]"/>
-					<button type="submit" class="btn btn-danger" style="width: 100%">
-						Delete
-					</button>
+			<br><br>
+			$if  "CoolCoderSJ" in user:
+				<form method="POST" action="admin/delete">
+				<input type="hidden" name="id" value="$theme['id']"/>
+				<button type="submit" class="alert" style="width: 100%">
+				Delete
+				</button>
 				</form>
-				<form method="POST" action="image" enctype="multipart/form-data">
-					<input type="hidden" name="id" value="$theme[0]"/>
-					<input type="file" class="form-control inputadd" name="myfile" id="formFile" placeholder="Upload a Screenshot showing repl.it with your theme">
-					<button type="submit" class="btn btn-primary" style="width: 100%">
-						Change Image
-					</button>
+				<form method="POST" action="admin/verify">
+				<input type="hidden" name="id" value="$theme['id']"/>
+				<button type="submit" class="btn btn-success" style="width: 100%">
+				Verify
+				</button>
 				</form>
 			</div>
-			<div class="modal fade" id="t$theme[0]" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-				<div class="modal-dialog" role="document">
-					<div class="modal-content">
-					<div class="modal-header">
-						<h5 class="modal-title" id="exampleModalLabel">$theme[2]</h5>
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-						</button>
-					</div>
-					<div class="modal-body">
-						<h2>JS Code for Bookmarklets</h2>
-						<br>
-						<button onclick="copy('js$theme[0]')" class="btn btn-primary">Copy to clipboard</button>
-						<br>
-						<pre id="$theme[0]">
-							<code id="js$theme[0]" class="javascript"><br>$theme[-3]	
-							</code>
-						</pre>
-						<br><br>
-						<h2>Tampermonkey Script</h2>
-						<br>
-						<button onclick="copy('ts$theme[0]')" class="btn btn-primary">Copy to clipboard</button>
-						<br>
-						<pre id="$theme[0]">
-							<code id="ts$theme[0]" class="javascript"><br>$js_wa[theme[0]]	
-							</code>
-						</pre>
-						<script>
-							function copy(textid) {
-								let copyTextarea = document.getElementById(textid).textContent
-								try {
-								
-								navigator.clipboard.writeText(copyTextarea)
-								} catch(err) {
-								alert(`Unable to copy, $${err}`);
-								}
-							}
-						</script>
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-					
-					</div>
-					</div>
-				</div>
-				</div>
-</div>
+			</div>
+			<div id="t$theme['id']" class="modal-container">
+				<center>
+				<div class="modal" style="padding: 30px !important; height: 230%;">
+					<h2 onclick="modalhide(document.getElementById('t$theme['id']'))" style="text-align: left;">&times;</h2>
+					<h2 style="text-align: center">$theme['name']</h2>
+					<hr>
+					<br>
+					<h2>JS Code for Bookmarklets</h2>
+					<br>
+					<button onclick="copy('js$theme['id']')" class="btn btn-primary">Copy to clipboard</button>
+					<br>
+					<pre id="$theme['id']">
+						<code id="js$theme['id']" class="javascript"><br>$theme['code']
+						</code>
+					</pre>
+					<br><br>
+					<h2>Tampermonkey Script</h2>
+					<br>
+					<button onclick="copy('ts$theme['id']')" class="btn btn-primary">Copy to clipboard</button>
+					<br>
+					<pre id="$theme['id']">
+						<code id="ts$theme['id']" class="javascript"><br>$theme['js_wa']
+						</code>
+					</pre>
+					<script>
+						function copy(textid) {
+							let copyTextarea = document.getElementById(textid).textContent
+							try {
 
-<a class="coded-on-replit text" href="https://CoolCoderSJ.repl.co" target="_blank">
-    Shuchir Jain
-  </a>
+							navigator.clipboard.writeText(copyTextarea)
+							} catch(err) {
+							alert(`Unable to copy, $${err}`);
+							}
+						}
+					</script>
+				</div>
+				</center>
+			</div>
+
+</div>

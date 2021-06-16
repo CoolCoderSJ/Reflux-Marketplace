@@ -1,30 +1,26 @@
 $def with (user)
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<link href="https://Minimalist.coolcodersj.repl.co/nord" rel="stylesheet" type="text/css" />
 <link rel="stylesheet" href="static/css/style.css">
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 <link rel="stylesheet"
-      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/atom-one-dark.min.css">
+	  href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/atom-one-dark.min.css">
 				<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
 				<script>hljs.initHighlightingOnLoad();</script>
 <script src="static/js/script.js"></script>
 <title>Reflux Marketplace</title>
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="/">Reflux Marketplace</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-    <div class="navbar-nav">
-      <a class="nav-item nav-link active" href="/">Home <span class="sr-only">(current)</span></a>
-      <a class="nav-item nav-link" href="/add">Share a theme</a>
-	  <a class="nav-item nav-link" href="https://github.com/frissyn/Reflux">Reflux Github Repo</a>
-		  
-	  <a class="nav-item nav-link" href="/api">View the API Docs</a>
-	  <a class="nav-item nav-link" href="/generator">Theme Generator</a>
-    </div>
-  </div>
+<nav class="topnav">
+<a class="brand" href="/">Reflux Marketplace</a>
+<div class="topnavitem">
+<a href="/">Home</a>
+<a href="/add">Share a theme</a>
+<a href="https://github.com/frissyn/Reflux">Reflux Github Repo</a>
+<a href="/api">View the API Docs</a>
+<a href="/generator">Theme Generator</a>
+<a href="https://github.com/CoolCoderSJ/Reflux-Marketplace">View on Github</a>
+<a href="https://discord.com/api/oauth2/authorize?client_id=826087358096474132&permissions=0&scope=bot">Discord Bot</a>
+</div>
 </nav>
 
 <style>
@@ -34,48 +30,43 @@ $def with (user)
 </style>
 
 <body>
-$if user == "CoolCoderSJ":
 	<form method="post" action = "generator">
 
 	<div class="form-group">
-		<input type="username" class="form-control" id="short" name="person"  aria-describedby="emailHelp" placeholder="Your Repl.it Username (The exact one please, we will ping you when it is added.)" required>
+		<input class="input" name="person" value="$user" required disabled>
 		<br>
-		<input type="username" class="form-control" id="short" name="name"  aria-describedby="emailHelp" placeholder="Your Theme's Name" required>
+		<input class="input" name="name"  placeholder="Your Theme's Name" required>
 		<br>
-		<input type="username" class="form-control" id="short" name="desc"  aria-describedby="emailHelp" placeholder="Your Theme's Description" required>
+		<input class="input" name="desc"  placeholder="Your Theme's Description" required>
 		<br>
 
 		<label>Controls Color 1</label>
 		<p>This is the run button's border</p>
-		<input type="color" name="control_2" class="form-control" required>
+		<input type="color" name="control_2" class="input" required>
 		<br>
 		<label>Controls Color 2</label>
 		<p>This is the run button's fill color, language icon fill color, share button fill color, sidebar icons fill on hover, Start thread button border.</p>
-		<input type="color" name="control_3" class="form-control" required>
+		<input type="color" name="control_3" class="input" required>
 		<br>
 		<label>Primary Color </label>
 		<p>This is the current file tab fill, and the sidebar icon's outlines.</p>
-		<input type="color" name="primary" class="form-control" required>
+		<input type="color" name="primary" class="input" required>
 		<br>
 		<label>Background Color 1</label>
 		<p>This is the file bar's fill color, the sidebar fill, the top bar fill, and current tab for console/shell. (The fill color for the tab you are currently on for console/shell)</p>
-		<input type="color" name="bg_1" class="form-control" required>
+		<input type="color" name="bg_1" class="input" required>
 		<br>
 		<label>Background Color 2</label>
 		<p>This is the non-current tab for console/shell. (The fill color for the tab you are currently NOT on for console/shell)</p>
-		<input type="color" name="bg_2" class="form-control" required>
+		<input type="color" name="bg_2" class="input" required>
 		<br>
 		<label>Background Color 3</label>
 		<p>This is the fill color for the space between the editor and top bar, and the space between all of the main elements. (Editor, sidebars, etc.)</p>
-		<input type="color" name="bg_3" class="form-control" required>
+		<input type="color" name="bg_3" class="input" required>
 		<br>
 	</div>
 		<br>
 		<br>
 	<button type="submit" class="btn btn-primary">Add</button>
 	</form>
-$else:
-	<div class="alert alert-danger" role="alert">
-	This is a super beta feature. For this reason, it is open to Admins/Devs only. If you are a Dev, please Login.
-	</div>
 </body>
