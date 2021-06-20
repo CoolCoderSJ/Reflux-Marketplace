@@ -1,10 +1,11 @@
-$def with (code, db, user)
+$def with (theme)
 <meta name="viewport" content="width=device-width, inital-scale=1">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+
 <link rel="stylesheet"
 	  href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/atom-one-dark.min.css">
 				<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
 				<script>hljs.initHighlightingOnLoad();</script>
-<script src="static/js/script.js"></script>
 <link href="https://Minimalist.coolcodersj.repl.co/nord?yeet-cache" rel="stylesheet" type="text/css" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://Minimalist.coolcodersj.repl.co/mjs"></script>
@@ -39,16 +40,6 @@ $def with (code, db, user)
 			  <li>Share a theme</li>
 			  </a>
 			  <br>
-			  $if user == "":
-			      <a href="/login">
-				  <li>Login</li>
-				  </a>
-				  <br>
-			  $else:
-			      <a href="/admin">
-				  <li>Admin Panel</li>
-				  </a>
-				  <br>
 			  <a href="https://github.com/frissyn/Reflux">
 			  <li>Reflux Github Repo</li>
 			  </a>
@@ -86,40 +77,63 @@ $def with (code, db, user)
   grid-template-columns: repeat(1, 1fr);
 }
 }
+
+.fa-star:hover {
+	cursor: pointer;
+}
 </style><br>
-<div class="success" role="alert">
-	  Supported by the creator of Reflux!
-</div>
-$if code == "1":
-	<div class="success" role="alert">
-		  Your theme has been submitted and is awaiting review!
-	</div>
-$elif code == "2":
-	<div class="success" role="alert">
-		  Your theme has been submitted and is awaiting review! (Due to a bug, just come back to the marketplace once it is approved to find your code.)
-	</div>
-
-
-
 
 <br><br>
-<div class="card-group">
+	<div style="padding: 30px;">
+		<img src="$theme['imgurl']" class="card-img-top" alt="preview" style="width: 400px; float: left; margin-right: 15px;">
+		<h2 style="margin-top: 0px;">$theme['name']</h2>
+		<h3 class="creator"><a href="/user/$theme['creator']">$theme['creator']</a></h3>
+		<h5>$theme['description']</h5>
+		<form method="post" action="/star" id="star_form">
+			<input type="hidden" name="id" value="$theme['id']">
+			$if not theme['starred']:
+				<i class="far fa-star" style="float: left; margin-top: 4px; margin-right: 5px;" onclick="document.getElementById('star_form').submit()"></i>
+			$else:
+				<i class="fas fa-star" style="float: left; margin-top: 4px; margin-right: 5px;" onclick="document.getElementById('star_form').submit()"></i>
+			
+			<p style="float: left; margin-top: 0px;">$theme['stars']</p>
+		</form>
 
-	$for theme in db:
-		<div style="padding: 30px;">
-		<div class="card" style="padding-bottom: 0px;">
-			<img src="$theme['imgurl']" class="card-img-top" alt="preview" style="width: 100%;">
-			<div class="card-body">
-			<h2 class="card-title" style="margin-bottom: 0px;">$theme['name']</h2>
-			<h3 class="creator" style="margin-top: 0px; margin-bottom: 0px;"><a href="/user/$theme['creator']">$theme['creator']</a></h3>
-			<h5 style="margin-top: 0px;">$theme['description']</h5>
-			</div>
-		
-			<a href="/theme/$theme['id']"><button type="button">
-		View Theme
-		</button></a>
-		<br><br>
+	<div>
+		<center>
+		<div><br><br><br>
+			<hr>
+			<h2>JS Code for Bookmarklets</h2>
+			<br>
+			<button onclick="copy('js$theme['id']')" class="btn btn-primary">Copy to clipboard</button>
+			<br>
+			<pre id="$theme['id']">
+				<code id="js$theme['id']" class="javascript"><br>$theme['code']
+				</code>
+			</pre>
+			<br><br>
+			<h2>Tampermonkey Script</h2>
+			<br>
+			<button onclick="copy('ts$theme['id']')" class="btn btn-primary">Copy to clipboard</button>
+			<br>
+			<pre id="$theme['id']">
+				<code id="ts$theme['id']" class="javascript"><br>$theme['js_wa']
+				</code>
+			</pre>
+			<script>
+				function copy(textid) {
+					let copyTextarea = document.getElementById(textid).textContent
+					try {
+
+					navigator.clipboard.writeText(copyTextarea)
+					} catch(err) {
+					alert(`Unable to copy, $${err}`);
+					}
+				}
+			</script>
 		</div>
-		</div>
+		</center>
+	</div>
+	</div>
 
 </div>

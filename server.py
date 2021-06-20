@@ -9,9 +9,13 @@ import base64
 import cloudinary
 import cloudinary.api
 import cloudinary.uploader
-import os
 import random
 import requests
+from easypydb import DB
+
+userdb = DB("users", os.environ['DB_TOKEN'])
+userdb.autoload = True
+userdb.autosave = True
 
 cloudinary.config(
 	cloud_name = os.getenv("CLOUDINARY_CLOUD_NAME"),
@@ -23,7 +27,6 @@ render = web.template.render('templates/')
 
 urls = (
 	'/', 'index',
-	'/add', 'add',
 	'/apiv1', 'apiv1',
 	'/apiv2', 'apiv2',
 	'/login', 'login',
@@ -36,10 +39,388 @@ urls = (
 	'/admin/code', 'code',
 	"/callback", "callback",
 	'/login/admin', 'adminlogin',
-	'/login/replit/callback', 'replitcallback'
+	'/login/replit/callback', 'replitcallback',
+	'/theme/(.*)', 'theme',
+	'/user/(.*)/stars', 'star',
+	'/user/(.*)', 'user',
+	'/star', 'star_toggle'
 	)
 app = web.application(urls, locals())
 session = web.session.Session(app, web.session.DiskStore('sessions'))
+
+class star_toggle:
+	def POST(self):
+		i = web.input()
+		id = i.id
+		if not session.get("user"):
+			raise web.seeother("/login")
+
+		user = session.get("user").replace(" ", "")
+		if user not in userdb.data.keys():
+			userdb[user] = {
+				'stars': []
+			}
+		
+		if int(id) in userdb[user]['stars']:
+			data = userdb[user]['stars']
+			data.remove(int(id))
+			userdb[user] = {
+				'stars': data
+			}
+		elif int(id) not in userdb[user]['stars']:
+			data = userdb[user]['stars']
+			data.append(int(id))
+			userdb[user] = {
+				'stars': data
+			}
+
+		raise web.seeother(f"/theme/{id}")
+
+class user:
+	def GET(self, user):
+		themes = []
+		themes2 = []
+		ids = []
+		for key in db:
+			ids.append(int(key))
+		ids.sort()
+		ids.reverse()
+		for theme in ids:
+			if db[theme]['creator'].lower().replace(" ", "") == user.lower():
+				a = {}
+				a['id'] = theme
+				for val in db[theme]:
+					a[val] = db[theme][val]
+				themes.append(a)
+		for theme in themes:
+			code = theme['code']
+			code = code.split("`")
+			code = code[1]
+			ts_script = """
+			// ==UserScript==
+// @name         Reflux -- {{{NAME}}}
+// @namespace    http://reflux-marketplace.coolcodersj.repl.co/
+// @version      0.1
+// @description  {{{DESC}}}
+// @author       {{{AUTHOR}}}
+// @match        https://*.replit.com/*
+// @grant        none
+// ==/UserScript==
+
+(
+	function () {
+		let p1=document.getElementById("reflux-theme");
+		let p2=document.getElementById("reflux-display");
+		if (p1 && p2) {
+			var go=confirm("There is a Reflux theme already running. Would you like to stop it?");
+			if (go) {
+				p1.remove();p2.remove();alert("This theme has been stopped.");
+			} else {alert("This theme will continue running.");
+				   }
+		}
+		else {
+			var go2="True"};
+		if (go2 === "True") {
+			var style=document.createElement("style");
+			var head=document.getElementsByTagName("head")[0];
+			var target=document.getElementsByClassName("jsx-2607100739")[0];
+			style.setAttribute("id", "reflux-theme");
+			style.appendChild(document.createTextNode(
+				`{{{code}}}`
+			)
+							 );
+			if (true) {
+				console.log(true);
+			} else {
+				alert("Reflux badge could not be applied. This theme will run silently.");
+			}
+			head.appendChild(style);
+		}
+		else {
+			alert("Reflux operation cancelled.");
+		}
+	}
+)
+();
+			"""
+			ts_script = ts_script.replace("{{{NAME}}}", theme['name'])
+			ts_script = ts_script.replace("{{{AUTHOR}}}", theme['creator'])
+			ts_script = ts_script.replace("{{{DESC}}}", theme['description'])
+			ts_script = ts_script.replace("{{{code}}}", code)
+			theme['js_wa'] = ts_script
+			themes2.append(theme)
+		
+		userdata = {}
+		try:
+			r = requests.get(f"https://replit.com/data/profiles/{user}")
+			r = r.json()
+			imgurl = r['icon']['url']
+			bio = r['bio']
+		except:
+			imgurl = ""
+			bio = ""
+		
+		try:
+			stars = userdb[user]['stars']
+		except:
+			stars = []
+
+		userdata['imgurl'] = imgurl
+		userdata['bio'] = bio
+		userdata['name'] = user
+		userdata['starcount'] = len(stars)
+		userdata['themecount'] = len(themes2)
+
+		return render.user(themes2, userdata)
+
+class star:
+	def GET(self, user):
+		user = user.replace(" ", "")
+		themes = []
+		themes2 = []
+		ids = []
+		for key in db:
+			ids.append(int(key))
+		ids.sort()
+		ids.reverse()
+		for theme in ids:
+			if db[theme]['creator'].lower().replace(" ", "") == user.lower():
+				a = {}
+				a['id'] = theme
+				for val in db[theme]:
+					a[val] = db[theme][val]
+				themes.append(a)
+		for theme in themes:
+			code = theme['code']
+			code = code.split("`")
+			code = code[1]
+			ts_script = """
+			// ==UserScript==
+// @name         Reflux -- {{{NAME}}}
+// @namespace    http://reflux-marketplace.coolcodersj.repl.co/
+// @version      0.1
+// @description  {{{DESC}}}
+// @author       {{{AUTHOR}}}
+// @match        https://*.replit.com/*
+// @grant        none
+// ==/UserScript==
+
+(
+	function () {
+		let p1=document.getElementById("reflux-theme");
+		let p2=document.getElementById("reflux-display");
+		if (p1 && p2) {
+			var go=confirm("There is a Reflux theme already running. Would you like to stop it?");
+			if (go) {
+				p1.remove();p2.remove();alert("This theme has been stopped.");
+			} else {alert("This theme will continue running.");
+				   }
+		}
+		else {
+			var go2="True"};
+		if (go2 === "True") {
+			var style=document.createElement("style");
+			var head=document.getElementsByTagName("head")[0];
+			var target=document.getElementsByClassName("jsx-2607100739")[0];
+			style.setAttribute("id", "reflux-theme");
+			style.appendChild(document.createTextNode(
+				`{{{code}}}`
+			)
+							 );
+			if (true) {
+				console.log(true);
+			} else {
+				alert("Reflux badge could not be applied. This theme will run silently.");
+			}
+			head.appendChild(style);
+		}
+		else {
+			alert("Reflux operation cancelled.");
+		}
+	}
+)
+();
+			"""
+			ts_script = ts_script.replace("{{{NAME}}}", theme['name'])
+			ts_script = ts_script.replace("{{{AUTHOR}}}", theme['creator'])
+			ts_script = ts_script.replace("{{{DESC}}}", theme['description'])
+			ts_script = ts_script.replace("{{{code}}}", code)
+			theme['js_wa'] = ts_script
+			themes2.append(theme)
+
+		try:
+			stars = userdb[user]['stars']
+		except:
+			stars = []
+		
+		themelist = []
+		star_themes = []
+
+		for id in stars:
+			a = {}
+			a['id'] = id
+			for val in db[id]:
+				a[val] = db[id][val]
+			themelist.append(a)
+
+		for theme in themelist:
+			code = theme['code']
+			code = code.split("`")
+			code = code[1]
+			ts_script = """
+			// ==UserScript==
+// @name         Reflux -- {{{NAME}}}
+// @namespace    http://reflux-marketplace.coolcodersj.repl.co/
+// @version      0.1
+// @description  {{{DESC}}}
+// @author       {{{AUTHOR}}}
+// @match        https://*.replit.com/*
+// @grant        none
+// ==/UserScript==
+
+(
+	function () {
+		let p1=document.getElementById("reflux-theme");
+		let p2=document.getElementById("reflux-display");
+		if (p1 && p2) {
+			var go=confirm("There is a Reflux theme already running. Would you like to stop it?");
+			if (go) {
+				p1.remove();p2.remove();alert("This theme has been stopped.");
+			} else {alert("This theme will continue running.");
+				   }
+		}
+		else {
+			var go2="True"};
+		if (go2 === "True") {
+			var style=document.createElement("style");
+			var head=document.getElementsByTagName("head")[0];
+			var target=document.getElementsByClassName("jsx-2607100739")[0];
+			style.setAttribute("id", "reflux-theme");
+			style.appendChild(document.createTextNode(
+				`{{{code}}}`
+			)
+							 );
+			if (true) {
+				console.log(true);
+			} else {
+				alert("Reflux badge could not be applied. This theme will run silently.");
+			}
+			head.appendChild(style);
+		}
+		else {
+			alert("Reflux operation cancelled.");
+		}
+	}
+)
+();
+			"""
+			ts_script = ts_script.replace("{{{NAME}}}", theme['name'])
+			ts_script = ts_script.replace("{{{AUTHOR}}}", theme['creator'])
+			ts_script = ts_script.replace("{{{DESC}}}", theme['description'])
+			ts_script = ts_script.replace("{{{code}}}", code)
+			theme['js_wa'] = ts_script
+			star_themes.append(theme)
+		userdata = {}
+		try:
+			r = requests.get(f"https://replit.com/data/profiles/{user}")
+			r = r.json()
+			imgurl = r['icon']['url']
+			bio = r['bio']
+		except:
+			imgurl = ""
+			bio = ""
+		
+		try:
+			stars = userdb[user]['stars']
+		except:
+			stars = []
+
+		userdata['imgurl'] = imgurl
+		userdata['bio'] = bio
+		userdata['name'] = user
+		userdata['starcount'] = len(stars)
+		userdata['themecount'] = len(themes2)
+
+		return render.star(star_themes, userdata)
+
+class theme:
+	def GET(self, themeid):
+		themeid = int(themeid)
+		theme = {}
+		for val in db[themeid]:
+			theme[val] = db[themeid][val]
+		theme['id'] = themeid
+		theme['creator'] = theme['creator'].replace(" ", "")
+		code = theme['code']
+		code = code.split("`")
+		code = code[1]
+		ts_script = """
+		// ==UserScript==
+// @name         Reflux -- {{{NAME}}}
+// @namespace    http://reflux-marketplace.coolcodersj.repl.co/
+// @version      0.1
+// @description  {{{DESC}}}
+// @author       {{{AUTHOR}}}
+// @match        https://*.replit.com/*
+// @grant        none
+// ==/UserScript==
+
+(
+function () {
+	let p1=document.getElementById("reflux-theme");
+	let p2=document.getElementById("reflux-display");
+	if (p1 && p2) {
+		var go=confirm("There is a Reflux theme already running. Would you like to stop it?");
+		if (go) {
+			p1.remove();p2.remove();alert("This theme has been stopped.");
+		} else {alert("This theme will continue running.");
+				}
+	}
+	else {
+		var go2="True"};
+	if (go2 === "True") {
+		var style=document.createElement("style");
+		var head=document.getElementsByTagName("head")[0];
+		var target=document.getElementsByClassName("jsx-2607100739")[0];
+		style.setAttribute("id", "reflux-theme");
+		style.appendChild(document.createTextNode(
+			`{{{code}}}`
+		)
+							);
+		if (true) {
+			console.log(true);
+		} else {
+			alert("Reflux badge could not be applied. This theme will run silently.");
+		}
+		head.appendChild(style);
+	}
+	else {
+		alert("Reflux operation cancelled.");
+	}
+}
+)
+();
+		"""
+		ts_script = ts_script.replace("{{{NAME}}}", theme['name'])
+		ts_script = ts_script.replace("{{{AUTHOR}}}", theme['creator'])
+		ts_script = ts_script.replace("{{{DESC}}}", theme['description'])
+		ts_script = ts_script.replace("{{{code}}}", code)
+		theme['js_wa'] = ts_script
+
+		starlist = []
+
+		for user in userdb.data.keys():
+			if int(themeid) in userdb[user]['stars']:
+				starlist.append(user)
+
+		theme['stars'] = len(starlist)
+
+		if str(session.get("user")).replace(" ", "") in starlist:
+			theme['starred'] = True
+		else:
+			theme['starred'] = False
+
+		return render.theme(theme)
 
 class replitcallback:
 	def GET(self):
@@ -105,7 +486,7 @@ class generator:
 			raise web.seeother("/login")
 		return render.generator(session.get("user").strip())
 	def POST(self):
-		i = web.input()
+		i = web.input(person=session.get("user").replace(" ", ""))
 		t = reflux.Theme({
 			"name": i.name,
 			"author": i.person,
@@ -185,10 +566,7 @@ class admin:
 	def GET(self):
 		if not "CoolCoderSJ" in session.get("user"):
 			return render.errors(4)
-		else:
-			for key in db:
-				print(key, db[key])
-			return render.admin(db)
+		return render.admin(db)
 
 class login:
 	def GET(self):
@@ -217,7 +595,9 @@ class callback:
 		token = r.text
 		r = requests.get(f"https://auth.sjurl.tk/api/me?Authorization={token}")
 		r = r.text
-		username = r.replace("'", "").replace(":", "").replace("username", "").replace("{", "").replace("}", "")
+		username = r.replace("'", "").replace(":", "").replace("username", "").replace("{", "").replace("}", "").replace(" ", "")
+		if username != "CoolCoderSJ":
+			return "You are not allowed to use SJAUTH to login since you are not an admin."
 		session.user = username
 		raise web.seeother("/")
 
@@ -326,16 +706,15 @@ class index:
 		ids.sort()
 		ids.reverse()
 		for theme in ids:
-			if db[theme]['verified']:
-				a = {}
-				a['id'] = theme
-				for val in db[theme]:
-					a[val] = db[theme][val]
-				themes.append(a)
+			a = {}
+			a['id'] = theme
+			for val in db[theme]:
+				a[val] = db[theme][val]
+			a['creator'] = a['creator'].replace(" ", "")
+			themes.append(a)
 		for theme in themes:
 			code = theme['code']
 			code = code.split("`")
-			print(code)
 			code = code[1]
 			ts_script = """
 			// ==UserScript==
@@ -391,7 +770,7 @@ class index:
 			theme['js_wa'] = ts_script
 			themes2.append(theme)
 		if session.get("user"):
-			user = session.get("user")
+			user = session.get("user").replace(" ", "")
 		else:
 			user = ""
 		return render.index(i.code, themes2, user)
@@ -400,7 +779,7 @@ class add:
 	def GET(self):
 		if not session.get("user"):
 			raise web.seeother("/login")
-		return render.add(session.get("user"))
+		return render.add(session.get("user").replace(" ", ""))
 	def POST(self):
 		i = web.input(myfile={})
 		person = i.person
@@ -438,7 +817,7 @@ class add:
 
 
 		content2 = "PERSON: "+person+"\n\nTHEME NAME: "+name+"\n\nDESCRIPTION: "+desc
-		webhook = DiscordWebhook(url="https://canary.discord.com/api/webhooks/806194998549938216/zY_NS1Ezc-e0YcEmlFDhV22yyEQ2XphnCBmyEAMggNht1TGbNPMzEyUlofhofnxCmJIB", content=content2)
+		webhook = DiscordWebhook(url=os.environ['DISCORD_WEBHOOK_URL'], content=content2)
 		webhook.execute()
 		if session.get("user") == "CoolCoderSJ":
 			user = "View Admin Panel"

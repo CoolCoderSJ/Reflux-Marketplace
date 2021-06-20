@@ -1,5 +1,4 @@
 $def with (user)
-<link href="https://Minimalist.coolcodersj.repl.co/nord" rel="stylesheet" type="text/css" />
 <link rel="stylesheet" href="static/css/style.css">
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
@@ -9,32 +8,64 @@ $def with (user)
 				<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
 				<script>hljs.initHighlightingOnLoad();</script>
 <script src="static/js/script.js"></script>
-<title>Reflux Marketplace</title>
-<nav class="topnav">
-<a class="brand" href="/">Reflux Marketplace</a>
-<div class="topnavitem">
-<a href="/">Home</a>
-<a href="/add">Share a theme</a>
-<a href="https://github.com/frissyn/Reflux">Reflux Github Repo</a>
-<a href="/api">View the API Docs</a>
-<a href="/generator">Theme Generator</a>
-<a href="https://github.com/CoolCoderSJ/Reflux-Marketplace">View on Github</a>
-<a href="https://discord.com/api/oauth2/authorize?client_id=826087358096474132&permissions=0&scope=bot">Discord Bot</a>
-</div>
-</nav>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://Minimalist.coolcodersj.repl.co/mjs"></script>
 
-<style>
-	body {
-	padding: 10px !important;
-	}
-</style>
+	<head>
+		<link href="https://Minimalist.coolcodersj.repl.co/nord" rel="stylesheet" type="text/css" />
+		<title>Reflux Marketplace</title>
+		<style>
+			form {
+				padding: 20px;
+			}
+			body {
+				margin-left: 150px;
+			}
+			.sidebari div {
+				margin-top: 0px !important;
+			}
+			.sidebari i {
+				margin-top: 40px !important;
+			}
+			.sidebar {
+				padding-top: 20px !important;
+			}
+		</style>
+
+<div class="sidebar" style="padding-top: 20px;">
+		  <ul>
+			  <a href="/">
+			  <li>Reflux Marketplace</li>
+			  </a>
+			  <br>
+			  <a href="/generator">
+			  <li>Share a theme</li>
+			  </a>
+			  <br>
+			  <a href="https://github.com/frissyn/Reflux">
+			  <li>Reflux Github Repo</li>
+			  </a>
+			  <br>
+			  <a href="/api">
+			  <li>View the API Docs</li>
+			  </a>
+			  <br>
+			  <a href="https://github.com/CoolCoderSJ/Reflux-Marketplace">
+			  <li>View on Github</li>
+			  </a>
+			  <br>
+			  <a href="https://discord.com/api/oauth2/authorize?client_id=826087358096474132&permissions=0&scope=bot">
+			  <li>Discord Bot</li>
+			  </a>
+			  <br>
+		  </ul>
+	  </div>
 
 <body>
 	<form method="post" action = "generator">
 
 	<div class="form-group">
-		<input class="input" name="person" value="$user" required disabled>
-		<br>
+
 		<input class="input" name="name"  placeholder="Your Theme's Name" required>
 		<br>
 		<input class="input" name="desc"  placeholder="Your Theme's Description" required>

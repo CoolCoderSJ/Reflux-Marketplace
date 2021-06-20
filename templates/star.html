@@ -1,5 +1,6 @@
-$def with (code, db, user)
+$def with (db, userdata)
 <meta name="viewport" content="width=device-width, inital-scale=1">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
 <link rel="stylesheet"
 	  href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/atom-one-dark.min.css">
 				<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
@@ -24,9 +25,6 @@ $def with (code, db, user)
 			.sidebar {
 				padding-top: 20px !important;
 			}
-			.creator:hover {
-				cursor: pointer;
-			}
 		</style>
 
 <div class="sidebar" style="padding-top: 20px;">
@@ -39,16 +37,6 @@ $def with (code, db, user)
 			  <li>Share a theme</li>
 			  </a>
 			  <br>
-			  $if user == "":
-			      <a href="/login">
-				  <li>Login</li>
-				  </a>
-				  <br>
-			  $else:
-			      <a href="/admin">
-				  <li>Admin Panel</li>
-				  </a>
-				  <br>
 			  <a href="https://github.com/frissyn/Reflux">
 			  <li>Reflux Github Repo</li>
 			  </a>
@@ -86,23 +74,23 @@ $def with (code, db, user)
   grid-template-columns: repeat(1, 1fr);
 }
 }
-</style><br>
-<div class="success" role="alert">
-	  Supported by the creator of Reflux!
-</div>
-$if code == "1":
-	<div class="success" role="alert">
-		  Your theme has been submitted and is awaiting review!
-	</div>
-$elif code == "2":
-	<div class="success" role="alert">
-		  Your theme has been submitted and is awaiting review! (Due to a bug, just come back to the marketplace once it is approved to find your code.)
-	</div>
-
-
-
-
+</style>
 <br><br>
+
+<div style="margin-right: 30px;">
+	<div style="overflow: hidden; height: 300px; width: 300px; border-radius: 50%;">
+	<img src="$userdata['imgurl']" style="width: 100%; height: 100%; border: none;">
+	</div>
+	<h1>$userdata['name']</h1>
+	<p>$userdata['bio']</p>
+	<a href="/user/$userdata['name']" style="text-decoration: none;">
+	<p style="float: left; margin-right: 30px;">$userdata['themecount'] Themes</p>
+	</a>
+	<a href="/user/$userdata['name'] /stars" style="text-decoration: none;"><i class="fas fa-star" style="float: left; margin-right: 5px;margin-top: 20px"></i></a>
+	<p style="float: left;">$userdata['starcount']</p>
+	</div>
+</div>
+<br><br><br><br>
 <div class="card-group">
 
 	$for theme in db:
@@ -111,7 +99,7 @@ $elif code == "2":
 			<img src="$theme['imgurl']" class="card-img-top" alt="preview" style="width: 100%;">
 			<div class="card-body">
 			<h2 class="card-title" style="margin-bottom: 0px;">$theme['name']</h2>
-			<h3 class="creator" style="margin-top: 0px; margin-bottom: 0px;"><a href="/user/$theme['creator']">$theme['creator']</a></h3>
+			<h3 style="margin-top: 0px; margin-bottom: 0px;">$theme['creator']</h3>
 			<h5 style="margin-top: 0px;">$theme['description']</h5>
 			</div>
 		

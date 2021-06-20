@@ -1,21 +1,58 @@
 $def with (db)
 <link href="https://Minimalist.coolcodersj.repl.co/nord" rel="stylesheet" type="text/css" />
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://Minimalist.coolcodersj.repl.co/mjs"></script>
 
-<title>Reflux Marketplace</title>
-<nav class="topnav">
-<a class="brand" href="/">Reflux Marketplace</a>
-<div class="topnavitem">
-<a href="/">Home</a>
-<a href="/add">Share a theme</a>
-<a href="https://github.com/frissyn/Reflux">Reflux Github Repo</a>
-<a href="/api">View the API Docs</a>
-<a href="/generator">Theme Generator</a>
-<a href="https://github.com/CoolCoderSJ/Reflux-Marketplace">View on Github</a>
-<a href="https://discord.com/api/oauth2/authorize?client_id=826087358096474132&permissions=0&scope=bot">Discord Bot</a>
-</div>
-</nav>
+	<head>
+		<link href="https://Minimalist.coolcodersj.repl.co/nord" rel="stylesheet" type="text/css" />
+		<title>Reflux Marketplace</title>
+		<style>
+			form {
+				padding: 20px;
+			}
+			body {
+				margin-left: 150px;
+			}
+			.sidebari div {
+				margin-top: 0px !important;
+			}
+			.sidebari i {
+				margin-top: 40px !important;
+			}
+			.sidebar {
+				padding-top: 20px !important;
+			}
+		</style>
+
+<div class="sidebar" style="padding-top: 20px;">
+		  <ul>
+			  <a href="/">
+			  <li>Reflux Marketplace</li>
+			  </a>
+			  <br>
+			  <a href="/generator">
+			  <li>Share a theme</li>
+			  </a>
+			  <br>
+			  <a href="https://github.com/frissyn/Reflux">
+			  <li>Reflux Github Repo</li>
+			  </a>
+			  <br>
+			  <a href="/api">
+			  <li>View the API Docs</li>
+			  </a>
+			  <br>
+			  <a href="https://github.com/CoolCoderSJ/Reflux-Marketplace">
+			  <li>View on Github</li>
+			  </a>
+			  <br>
+			  <a href="https://discord.com/api/oauth2/authorize?client_id=826087358096474132&permissions=0&scope=bot">
+			  <li>Discord Bot</li>
+			  </a>
+			  <br>
+		  </ul>
+	  </div>
 
 <style>
 	.card-group {
@@ -30,54 +67,21 @@ $def with (db)
 }
 </style>
 <br><br>
-<div class="card-group">
-
-	$for theme in db:
-		$if db[theme]['verified'] == False:
-			<div class="card">
-				<form method="post" action="admin/edit">
-				<img src="$db[theme]['imgurl']" class="card-img-top" alt="preview" style="width: 450px;">
-				<div class="card-body">
-				<h5 class="card-title"><input class="input" value="$db[theme]['name']" name="name"> , by <input class="input" value="$db[theme]['creator']" name="creator"></h5>
-				<p class="card-text"><input class="input" value="$db[theme]['description']" name="desc"></p>
-				<p class="card-text"><small class="text-muted"></small></p>
-				</div>
-				<input type="hidden" name="id" value="$theme"/>
-				<input type="file" class="form-control inputadd" name="myfile" id="formFile" placeholder="Upload a Screenshot showing repl.it with your theme">
-				
-						<br>
-				<button type="submit" class="btn btn-primary" style="width: 100%">
-				Edit
-				</button>
-				</form>
-				<button type="button" class="btn btn-primary" modalid="t$theme" onclick="modalshow(this)">
-			See Code
-			</button>
-			<br><br>
-			<form method="POST" action="admin/delete">
-			<input type="hidden" name="id" value="$theme"/>
-			<button type="submit" class="alert" style="width: 100%">
-			Delete
-			</button>
-			</form>
-			<form method="POST" action="admin/verify">
-			<input type="hidden" name="id" value="$theme"/>
-			<button type="submit" class="btn btn-success" style="width: 100%">
-			Verify
-			</button>
-			</form>
-			</div>
-			<div id="t$theme" class="modal-container">
-				<center>
-				<div class="modal" style="padding: 30px !important; height: 200px;">
-					<h2 onclick="modalhide(document.getElementById('t$theme'))" style="text-align: left;">&times;</h2><hr>
-					<br>
-					<form method="post" action="admin/code">
-						<input type="hidden" value="$theme" name="id">
-						<input class="input" value="$db[theme]['code']" name="code">
-					</form>
-				</div>
-				</center>
-			</div>
-			
-</div>
+		<form method="post" action="admin/edit">
+		<input class="input" name="id" placeholder="Theme ID"/>
+		<input class="input" placeholder="Theme Name" name="name">
+		<input class="input" placeholder="Theme Creator" name="creator">
+		<input class="input" placeholder="Theme Description" name="desc">
+		<input type="file" class="form-control inputadd" name="myfile" id="formFile">
+		<br>
+		<button type="submit" class="btn btn-primary" style="width: 100%">
+		Edit
+		</button>
+		</form>
+	<br><br>
+	<form method="POST" action="admin/delete">
+	<input class="input" name="id" placeholder="Theme ID"/>
+	<button type="submit" class="alert" style="width: 100%">
+	Delete
+	</button>
+	</form>

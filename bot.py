@@ -55,11 +55,11 @@ async def theme(ctx, id):
 	embed.set_image(url=url)
 	await ctx.send(embed=embed)
 	msg = await ctx.send("React with a :white_check_mark: to this message to receive the code for this theme. Make sure you have allowed DMs from unkown users or users from this server.")
-	await msg.add_reaction("âœ…")
+	await msg.add_reaction("Ã¢Å“â€¦")
 	@client.event
 	async def on_reaction_add(reaction, user):
 		print(reaction.emoji)
-		if reaction.emoji == "âœ…" and reaction.message.id == msg.id and "Reflux Marketplace" not in user.name:
+		if reaction.emoji == "Ã¢Å“â€¦" and reaction.message.id == msg.id and "Reflux Marketplace" not in user.name:
 			code = themes[0][-3]
 			code = code.split("`")
 			code = code[1]
@@ -247,7 +247,7 @@ async def generate(ctx, *, args=""):
 @client.command()
 async def info(ctx):
 	embed=discord.Embed(title="Bot Info", url="https://reflux-marketplace.coolcodersj.repl.co/generator", color=0x0080ff)
-	embed.set_author(name="SnowCoder â •", icon_url="https://frissyn.herokuapp.com/main/im_/https://images-ext-2.discordapp.net/external/Z58f6hcmeb6fg-PY4bcuytPov6YLZ900yzxbzGy0_qI/%3Fsize%3D1024/https/cdn.discordapp.com/avatars/744921397582888991/2b1d08bfb5b3b702590b6c1a074636d2.webp?width=300&height=300")
+	embed.set_author(name="SnowCoder Ã¢Â â€¢", icon_url="https://frissyn.herokuapp.com/main/im_/https://images-ext-2.discordapp.net/external/Z58f6hcmeb6fg-PY4bcuytPov6YLZ900yzxbzGy0_qI/%3Fsize%3D1024/https/cdn.discordapp.com/avatars/744921397582888991/2b1d08bfb5b3b702590b6c1a074636d2.webp?width=300&height=300")
 	embed.add_field(name="Github Repo", value="https://github.com/CoolCoderSJ/Reflux-Marketplace")
 	embed.add_field(name="Repl Link", value="https://replit.com/@CoolCoderSJ/Reflux-Marketplace")
 	embed.add_field(name="Website", value="https://Reflux-Marketplace.coolcodersj.repl.co")
@@ -257,7 +257,7 @@ async def info(ctx):
 @client.command()
 async def help(ctx):
 	embed=discord.Embed(title="Help", url="https://reflux-marketplace.coolcodersj.repl.co/generator", color=0x0080ff)
-	embed.set_author(name="SnowCoder â •", icon_url="https://frissyn.herokuapp.com/main/im_/https://images-ext-2.discordapp.net/external/Z58f6hcmeb6fg-PY4bcuytPov6YLZ900yzxbzGy0_qI/%3Fsize%3D1024/https/cdn.discordapp.com/avatars/744921397582888991/2b1d08bfb5b3b702590b6c1a074636d2.webp?width=300&height=300")
+	embed.set_author(name="SnowCoder Ã¢Â â€¢", icon_url="https://frissyn.herokuapp.com/main/im_/https://images-ext-2.discordapp.net/external/Z58f6hcmeb6fg-PY4bcuytPov6YLZ900yzxbzGy0_qI/%3Fsize%3D1024/https/cdn.discordapp.com/avatars/744921397582888991/2b1d08bfb5b3b702590b6c1a074636d2.webp?width=300&height=300")
 	embed.add_field(name="View Bot Info", value="` r!info `")
 	embed.add_field(name="Generate a theme", value="Receive either JS code or Tampermonkey script. Use ` r!generate `")
 	embed.add_field(name="View all themes", value="` r!all `")
@@ -265,4 +265,4 @@ async def help(ctx):
 	await ctx.send(embed=embed)
 
 
-client.run(os.getenv("TOKEN")) 
+# client.run(os.getenv("TOKEN")) 
