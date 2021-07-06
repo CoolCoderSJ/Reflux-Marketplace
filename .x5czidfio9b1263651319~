@@ -1,0 +1,113 @@
+$def with (db, userdata)
+<meta name="viewport" content="width=device-width, inital-scale=1">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+<link rel="stylesheet"
+	  href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/atom-one-dark.min.css">
+				<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+				<script>hljs.initHighlightingOnLoad();</script>
+<script src="static/js/script.js"></script>
+<link href="https://Minimalist.coolcodersj.repl.co/nord?yeet-cache" rel="stylesheet" type="text/css" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://Minimalist.coolcodersj.repl.co/mjs"></script>
+
+	<head>
+		<title>Reflux Marketplace</title>
+		<style>
+			form {
+				padding: 20px;
+			}
+			.sidebari div {
+				margin-top: 0px !important;
+			}
+			.sidebari i {
+				margin-top: 40px !important;
+			}
+			.sidebar {
+				padding-top: 20px !important;
+			}
+		</style>
+
+<div class="sidebar" style="padding-top: 20px;">
+		  <ul>
+			  <a href="/">
+			  <li>Reflux Marketplace</li>
+			  </a>
+			  <br>
+			  <a href="/generator">
+			  <li>Share a theme</li>
+			  </a>
+			  <br>
+			  <a href="https://github.com/frissyn/Reflux">
+			  <li>Reflux Github Repo</li>
+			  </a>
+			  <br>
+			  <a href="/api">
+			  <li>View the API Docs</li>
+			  </a>
+			  <br>
+			  <a href="https://github.com/CoolCoderSJ/Reflux-Marketplace">
+			  <li>View on Github</li>
+			  </a>
+			  <br>
+			  <a href="https://discord.com/api/oauth2/authorize?client_id=826087358096474132&permissions=0&scope=bot">
+			  <li>Discord Bot</li>
+			  </a>
+			  <br>
+		  </ul>
+	  </div>
+
+<style>
+	.card-group {
+  display: grid;
+  grid-gap: 1fr;
+  grid-template-columns: repeat(2, 1fr);
+}
+.card {
+  width: 100%;
+  height: 100%;
+}
+@media (max-width: 500px) {
+.card-group {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  grid-gap: 1fr;
+  grid-template-columns: repeat(1, 1fr);
+}
+}
+</style>
+<br><br>
+
+<div style="margin-right: 30px;">
+	<div style="overflow: hidden; height: 300px; width: 300px; border-radius: 50%;">
+	<img src="$userdata['imgurl']" style="width: 100%; height: 100%; border: none;">
+	</div>
+	<h1>$userdata['name']</h1>
+	<p>$userdata['bio']</p>
+	<a href="/user/$userdata['name']" style="text-decoration: none;">
+	<p style="float: left; margin-right: 30px;">$userdata['themecount'] Themes</p>
+	</a>
+	<a href="/user/$userdata['name'] /stars" style="text-decoration: none;"><i class="fas fa-star" style="float: left; margin-right: 5px;margin-top: 20px"></i></a>
+	<p style="float: left;">$userdata['starcount']</p>
+	</div>
+</div>
+<br><br><br><br>
+<div class="card-group">
+
+	$for theme in db:
+		<div style="padding: 30px;">
+		<div class="card" style="padding-bottom: 0px;">
+			<img src="$theme['imgurl']" class="card-img-top" alt="preview" style="width: 100%;">
+			<div class="card-body">
+			<h2 class="card-title" style="margin-bottom: 0px;">$theme['name']</h2>
+			<h3 style="margin-top: 0px; margin-bottom: 0px;">$theme['creator']</h3>
+			<h5 style="margin-top: 0px;">$theme['description']</h5>
+			</div>
+		
+			<a href="/theme/$theme['id']"><button type="button">
+		View Theme
+		</button></a>
+		<br><br>
+		</div>
+		</div>
+
+</div>

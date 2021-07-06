@@ -1,0 +1,87 @@
+$def with (db)
+<link href="https://Minimalist.coolcodersj.repl.co/nord" rel="stylesheet" type="text/css" />
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://Minimalist.coolcodersj.repl.co/mjs"></script>
+
+	<head>
+		<link href="https://Minimalist.coolcodersj.repl.co/nord" rel="stylesheet" type="text/css" />
+		<title>Reflux Marketplace</title>
+		<style>
+			form {
+				padding: 20px;
+			}
+			body {
+				margin-left: 150px;
+			}
+			.sidebari div {
+				margin-top: 0px !important;
+			}
+			.sidebari i {
+				margin-top: 40px !important;
+			}
+			.sidebar {
+				padding-top: 20px !important;
+			}
+		</style>
+
+<div class="sidebar" style="padding-top: 20px;">
+		  <ul>
+			  <a href="/">
+			  <li>Reflux Marketplace</li>
+			  </a>
+			  <br>
+			  <a href="/generator">
+			  <li>Share a theme</li>
+			  </a>
+			  <br>
+			  <a href="https://github.com/frissyn/Reflux">
+			  <li>Reflux Github Repo</li>
+			  </a>
+			  <br>
+			  <a href="/api">
+			  <li>View the API Docs</li>
+			  </a>
+			  <br>
+			  <a href="https://github.com/CoolCoderSJ/Reflux-Marketplace">
+			  <li>View on Github</li>
+			  </a>
+			  <br>
+			  <a href="https://discord.com/api/oauth2/authorize?client_id=826087358096474132&permissions=0&scope=bot">
+			  <li>Discord Bot</li>
+			  </a>
+			  <br>
+		  </ul>
+	  </div>
+
+<style>
+	.card-group {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 1fr;
+  grid-template-columns: repeat(3, 1fr);
+}
+.card {
+  width: 100%;
+  height: 100%;
+}
+</style>
+<br><br>
+		<form method="post" action="admin/edit">
+		<input class="input" name="id" placeholder="Theme ID"/>
+		<input class="input" placeholder="Theme Name" name="name">
+		<input class="input" placeholder="Theme Creator" name="creator">
+		<input class="input" placeholder="Theme Description" name="desc">
+		<input type="file" class="form-control inputadd" name="myfile" id="formFile">
+		<br>
+		<button type="submit" class="btn btn-primary" style="width: 100%">
+		Edit
+		</button>
+		</form>
+	<br><br>
+	<form method="POST" action="admin/delete">
+	<input class="input" name="id" placeholder="Theme ID"/>
+	<button type="submit" class="alert" style="width: 100%">
+	Delete
+	</button>
+	</form>
