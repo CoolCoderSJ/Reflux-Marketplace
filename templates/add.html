@@ -1,0 +1,86 @@
+$def with (user)
+<!DOCTYPE html>
+<html>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://Minimalist.coolcodersj.repl.co/mjs"></script>
+
+	<head>
+		<link href="https://Minimalist.coolcodersj.repl.co/nord" rel="stylesheet" type="text/css" />
+		<title>Reflux Marketplace</title>
+		<style>
+			form {
+				padding: 20px;
+			}
+			body {
+				margin-left: 150px;
+			}
+			.sidebari div {
+				margin-top: 0px !important;
+			}
+			.sidebari i {
+				margin-top: 40px !important;
+			}
+
+			.sidebar {
+				padding-top: 20px !important;
+			}
+		</style>
+
+<div class="sidebar" style="padding-top: 20px;">
+		  <ul>
+			  <a href="/">
+			  <li>Reflux Marketplace</li>
+			  </a>
+			  <br>
+			  <a href="/add">
+			  <li>Share a theme</li>
+			  </a>
+			  <br>
+			  <a href="https://github.com/frissyn/Reflux">
+			  <li>Reflux Github Repo</li>
+			  </a>
+			  <br>
+			  <a href="/api">
+			  <li>View the API Docs</li>
+			  </a>
+			  <br>
+			  <a href="/generator">
+			  <li>Theme Generator</li>
+			  </a>
+			  <br>
+			  <a href="https://github.com/CoolCoderSJ/Reflux-Marketplace">
+			  <li>View on Github</li>
+			  </a>
+			  <br>
+			  <a href="https://discord.com/api/oauth2/authorize?client_id=826087358096474132&permissions=0&scope=bot">
+			  <li>Discord Bot</li>
+			  </a>
+			  <br>
+		  </ul>
+	  </div>
+	</head>
+
+	<body>
+
+		<form method="post" action = "add" enctype="multipart/form-data">
+
+  <div class="form-group">
+	<input type="username" class="input" id="short" name="person" value="$user" required>
+	<br>
+	<input type="username" class="input" id="short" name="name" placeholder="Your Theme's Name" required>
+	<br>
+	<input type="username" class="input" id="short" name="desc" placeholder="Your Theme's Description" required>
+	<br>
+	<input type="url" class="input" id="short" name="code" placeholder="Your Theme's Repl URL" required>
+	<br>
+	<br>
+	<label for="formFile" class="form-label">Upload a Screenshot showing replit with your theme</label><br>
+	<input type="file" class="form-control inputadd" name="myfile" id="formFile" placeholder="Upload a Screenshot showing repl.it with your theme">
+
+  </div>
+	<br>
+	<br>
+  <button type="submit">Add</button>
+</form>
+	</body>
+</html>

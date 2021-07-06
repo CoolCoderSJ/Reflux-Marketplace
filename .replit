@@ -1,0 +1,5 @@
+language="bash"
+run="bash main.sh"
+
+[packager]
+ignoredPackages=["websocket"]

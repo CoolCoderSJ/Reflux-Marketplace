@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "reflux-marketplace"
+version = "0.1.0"
+description = ""
+authors = ["Your Name <you@example.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+"web.py" = "^0.62"
+replit = "^2.0.0"
+discord-webhook = "^0.11.0"
+reflux = "^0.2.0"
+discord = "^1.0.1"
+cloudinary = "^1.25.0"
+easypydb = "^0.4.4"
+selenium = "^3.141.0"
+base36 = "^0.1.1"
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"

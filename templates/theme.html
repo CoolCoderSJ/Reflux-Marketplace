@@ -1,0 +1,188 @@
+$def with (theme)
+<meta name="viewport" content="width=device-width, inital-scale=1">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+
+<link rel="stylesheet"
+	  href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/atom-one-dark.min.css">
+				<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+				<script>hljs.initHighlightingOnLoad();</script>
+<link href="https://Minimalist.coolcodersj.repl.co/nord?yeet-cache" rel="stylesheet" type="text/css" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://Minimalist.coolcodersj.repl.co/mjs"></script>
+
+	<head>
+		<title>Reflux Marketplace</title>
+		<style>
+			form {
+				padding: 20px;
+			}
+			.sidebari div {
+				margin-top: 0px !important;
+			}
+			.sidebari i {
+				margin-top: 40px !important;
+			}
+			.sidebar {
+				padding-top: 20px !important;
+			}
+			.creator:hover {
+				cursor: pointer;
+			}
+		</style>
+
+<div class="sidebar" style="padding-top: 20px;">
+		  <ul>
+			  <a href="/">
+			  <li>Reflux Marketplace</li>
+			  </a>
+			  <br>
+			  <a href="/generator">
+			  <li>Share a theme</li>
+			  </a>
+			  <br>
+			  <a href="https://github.com/frissyn/Reflux">
+			  <li>Reflux Github Repo</li>
+			  </a>
+			  <br>
+			  <a href="/api">
+			  <li>View the API Docs</li>
+			  </a>
+			  <br>
+			  <a href="https://github.com/CoolCoderSJ/Reflux-Marketplace">
+			  <li>View on Github</li>
+			  </a>
+			  <br>
+			  <a href="https://discord.com/api/oauth2/authorize?client_id=826087358096474132&permissions=0&scope=bot">
+			  <li>Discord Bot</li>
+			  </a>
+			  <br>
+		  </ul>
+	  </div>
+
+<style>
+	.card-group {
+  display: grid;
+  grid-gap: 1fr;
+  grid-template-columns: repeat(2, 1fr);
+}
+.card {
+  width: 100%;
+  height: 100%;
+}
+@media (max-width: 500px) {
+.card-group {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  grid-gap: 1fr;
+  grid-template-columns: repeat(1, 1fr);
+}
+}
+
+.fa-star:hover {
+	cursor: pointer;
+}
+</style><br>
+
+<br><br>
+	<div style="padding: 30px;">
+		<img src="$theme['imgurl']" class="card-img-top" alt="preview" style="width: 400px; float: left; margin-right: 15px;">
+		<h2 style="margin-top: 0px;">$theme['name']</h2>
+		<h3 class="creator"><a href="/user/$theme['creator']">$theme['creator']</a></h3>
+		<h5>$theme['description']</h5>
+		<form method="post" action="/star" id="star_form">
+			<input type="hidden" name="id" value="$theme['id']">
+			$if not theme['starred']:
+				<i class="far fa-star" style="float: left; margin-top: 4px; margin-right: 5px;" onclick="document.getElementById('star_form').submit()"></i>
+			$else:
+				<i class="fas fa-star" style="float: left; margin-top: 4px; margin-right: 5px;" onclick="document.getElementById('star_form').submit()"></i>
+			
+			<p style="float: left; margin-top: 0px;">$theme['stars']</p>
+		</form>
+
+	<div>
+		<center>
+		<div><br><br><br>
+			<hr>
+			<h2>JS Code for Bookmarklets</h2>
+			<br>
+			<button onclick="copy('js$theme['id']')" class="btn btn-primary">Copy to clipboard</button>
+			<br>
+			<pre id="$theme['id']">
+				<code id="js$theme['id']" class="javascript"><br>$theme['code']
+				</code>
+			</pre>
+			<br><br>
+			<h2>Tampermonkey Script</h2>
+			<br>
+			<button onclick="copy('ts$theme['id']')" class="btn btn-primary">Copy to clipboard</button>
+			<br>
+			<pre id="$theme['id']">
+				<code id="ts$theme['id']" class="javascript"><br>$theme['js_wa']
+				</code>
+			</pre>
+			<script>
+				function copy(textid) {
+					let copyTextarea = document.getElementById(textid).textContent
+					try {
+
+					navigator.clipboard.writeText(copyTextarea)
+					} catch(err) {
+					alert(`Unable to copy, $${err}`);
+					}
+				}
+			</script>
+		</div>
+		<div><br><br><br>
+			$if theme['owner']:
+				<h2>Edit this Theme</h2>
+				<form method="post" action = "https://Reflux-Marketplace.coolcodersj.repl.co/admin/code">
+				<input type="hidden" name="id" value="$theme['id']">
+				<div class="form-group">
+
+					<input class="input" name="name"  placeholder="Your Theme's Name" value="$theme['name']" required>
+					<br>
+					<input class="input" name="desc"  placeholder="Your Theme's Description" value="$theme['description']'" required>
+					<br>
+
+					<h3>Controls Color 1</h3>
+					<p>This is the run button's border</p>
+					<input type="color" name="control_2" class="input" value="$theme['config']['controls_1']" required><br><br>
+					
+					<h3>Controls Color 2</h3>
+					<p>This is the run button's fill color, language icon fill color, share button fill color, sidebar icons fill on hover, Start thread button border.</p>
+					<input type="color" name="control_3" class="input" value="$theme['config']['controls_2']" required><br><br>
+					
+					<h3>Primary Color </h3>
+					<p>This is the current file tab fill, and the sidebar icon's outlines.</p>
+					<input type="color" name="primary" class="input" value="$theme['config']['primary']" required><br><br>
+					
+					<h3>Background Color 1</h3>
+					<p>This is the file bar's fill color, the sidebar fill, the top bar fill, and current tab for console/shell. (The fill color for the tab you are currently on for console/shell)</p>
+					<input type="color" name="bg_1" class="input" value="$theme['config']['bg_1']" required><br><br>
+					
+					<h3>Background Color 2</h3>
+					<p>This is the non-current tab for console/shell. (The fill color for the tab you are currently NOT on for console/shell)</p>
+					<input type="color" name="bg_2" class="input" value="$theme['config']['bg_2']" required><br><br>
+					
+					<h3>Background Color 3</h3>
+					<p>This is the fill color for the space between the editor and top bar, and the space between all of the main elements. (Editor, sidebars, etc.)</p>
+					<input type="color" name="bg_3" class="input" value="$theme['config']['bg_3']" required><br><br>
+
+					<h3>Foreground Color 1</h3>
+					<p>This is the color for (mostly) all text on the site.</p>
+					<input type="color" name="fore_1" class="input" value="$theme['config']['fore_1']" required><br><br>
+					<h3>Foreground Color 2</h3>
+					<p>This is the text color for non-active file-tabs.</p>
+					<input type="color" name="fore_2" class="input" value="$theme['config']['fore_2']" required><br><br>
+					<br>
+				</div>
+					<br>
+					<br>
+				<button type="submit" class="btn btn-primary">Edit</button>
+				</form>
+		</div>
+		</center>
+	</div>
+	</div>
+
+</div>

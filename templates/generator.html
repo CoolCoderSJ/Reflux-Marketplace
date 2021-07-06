@@ -1,0 +1,110 @@
+$def with (user)
+<link rel="stylesheet" href="static/css/style.css">
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<link rel="stylesheet"
+	  href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/atom-one-dark.min.css">
+				<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+				<script>hljs.initHighlightingOnLoad();</script>
+<script src="static/js/script.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://Minimalist.coolcodersj.repl.co/mjs"></script>
+
+	<head>
+		<link href="https://Minimalist.coolcodersj.repl.co/nord" rel="stylesheet" type="text/css" />
+		<title>Reflux Marketplace</title>
+		<style>
+			form {
+				padding: 20px;
+			}
+			body {
+				margin-left: 150px;
+			}
+			.sidebari div {
+				margin-top: 0px !important;
+			}
+			.sidebari i {
+				margin-top: 40px !important;
+			}
+			.sidebar {
+				padding-top: 20px !important;
+			}
+		</style>
+
+<div class="sidebar" style="padding-top: 20px;">
+		  <ul>
+			  <a href="/">
+			  <li>Reflux Marketplace</li>
+			  </a>
+			  <br>
+			  <a href="/generator">
+			  <li>Share a theme</li>
+			  </a>
+			  <br>
+			  <a href="https://github.com/frissyn/Reflux">
+			  <li>Reflux Github Repo</li>
+			  </a>
+			  <br>
+			  <a href="/api">
+			  <li>View the API Docs</li>
+			  </a>
+			  <br>
+			  <a href="https://github.com/CoolCoderSJ/Reflux-Marketplace">
+			  <li>View on Github</li>
+			  </a>
+			  <br>
+			  <a href="https://discord.com/api/oauth2/authorize?client_id=826087358096474132&permissions=0&scope=bot">
+			  <li>Discord Bot</li>
+			  </a>
+			  <br>
+		  </ul>
+	  </div>
+
+<body>
+	<h4 class="info">If you recently added a theme, Click "Reflux Marketplace" from the sidebar.</h4>
+	<form method="post" action = "generator">
+
+	<div class="form-group">
+
+		<input class="input" name="name"  placeholder="Your Theme's Name" required>
+		<br>
+		<input class="input" name="desc"  placeholder="Your Theme's Description" required>
+		<br>
+
+		<h3>Controls Color 1</h3>
+		<p>This is the run button's border</p>
+		<input type="color" name="control_2" class="input" required><br><br>
+		
+		<h3>Controls Color 2</h3>
+		<p>This is the run button's fill color, language icon fill color, share button fill color, sidebar icons fill on hover, Start thread button border.</p>
+		<input type="color" name="control_3" class="input" required><br><br>
+		
+		<h3>Primary Color </h3>
+		<p>This is the current file tab fill, and the sidebar icon's outlines.</p>
+		<input type="color" name="primary" class="input" required><br><br>
+		
+		<h3>Background Color 1</h3>
+		<p>This is the file bar's fill color, the sidebar fill, the top bar fill, and current tab for console/shell. (The fill color for the tab you are currently on for console/shell)</p>
+		<input type="color" name="bg_1" class="input" required><br><br>
+		
+		<h3>Background Color 2</h3>
+		<p>This is the non-current tab for console/shell. (The fill color for the tab you are currently NOT on for console/shell)</p>
+		<input type="color" name="bg_2" class="input" required><br><br>
+		
+		<h3>Background Color 3</h3>
+		<p>This is the fill color for the space between the editor and top bar, and the space between all of the main elements. (Editor, sidebars, etc.)</p>
+		<input type="color" name="bg_3" class="input" required><br><br>
+		<h3>Foreground Color 1</h3>
+		<p>This is the color for (mostly) all text on the site.</p>
+		<input type="color" name="fore_1" class="input" required><br><br>
+		<h3>Foreground Color 2</h3>
+		<p>This is the text color for non-active file-tabs.</p>
+		<input type="color" name="fore_2" class="input" required><br><br>
+		<br>
+	</div>
+		<br>
+		<br>
+	<button type="submit" class="btn btn-primary">Add</button>
+	</form>
+</body>
